@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Messaging</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="js" href="app.js">
+
+</head>
+
+<body>
+    <main>
+        <h1>Terminal Messaging</h1>
+
+        <section id="login">
+            <label for="username-input">
+                Enter your username:
+            </label>
+
+            <input type="text" id="username-input">
+            <button id="login-button" class="btn login-btn">Login</button>
+
+        </section>
+
+        <section id="messaging">
+            <div id="online-users">
+                <h2>Online Users</h2>
+                <ul id="user-list">
+                    <!-- Online users will be displayed here -->
+                </ul>
+            </div>
+
+            <div id="message-area">
+                <h2>Messages</h2>
+                <div id="terminal-window" class="terminal-crt">
+                    <div class="screen-overlay"></div>
+                    <!-- Messages will be displayed here -->
+                </div>
+            </div>
+
+            <div id="message-input-container">
+                <label for="message-input">Enter message:</label>
+                <input type="text" id="message-input">
+                <button id="send-button" class="btn">Send</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const loginButton = document.getElementById("login-button");
+        const usernameInput = document.getElementById("username-input");
+        const userList = document.getElementById("user-list");
+        const messagingSection = document.getElementById("messaging");
+        const loginSection = document.getElementById("login");
+
+        let currentUser;
+
+        loginButton.addEventListener("click", () => {
+            const username = usernameInput.value.trim();
+            if (username.length === 0) {
+                alert("Please enter a username.");
+                return;
+            }
+
+            currentUser = username;
+            const userListItem = document.createElement("li");
+            userListItem.textContent = username;
+            userListItem.style.color = "#21C10A";
+            userListItem.classList.add("user-list-item");
+            userList.appendChild(userListItem);
+
+            loginSection.style.display = "none";
+            messagingSection.style.display = "block";
+        });
+
+        const messageInput = document.getElementById("message-input");
+        const terminalWindow = document.getElementById("terminal-window");
+        const typingIndicator = document.createElement("span");
+
+        typingIndicator.style.display = "none";
+        typingIndicator.style.color = "#FFB800";
+        terminalWindow.appendChild(typingIndicator);
+
+        let typingTimer;
+
+        messageInput.addEventListener("input", () => {
+            clearTimeout(typingTimer);
+            typingIndicator.textContent = currentUser ? `${currentUser} is typing...` : "Unknown is typing...";
+            typingIndicator.style.display = "inline";
+            typingTimer = setTimeout(() => {
+                typingIndicator.style.display = "none";
+            }, 1000);
+        });
+
+
+        const sendButton = document.getElementById("send-button");
+
+        sendButton.addEventListener("click", () => {
+            const message = messageInput.value.trim();
+            if (message.length === 0) {
+                return;
+            }
+            const messageElement = document.createElement("div");
+            const sender = currentUser ? currentUser : "Unknown";
+            messageElement.textContent = `${sender}: ${message}`;
+            messageElement.style.color = "#fff";
+            terminalWindow.appendChild(messageElement);
+            messageInput.value = "";
+            typingIndicator.style.display = "none";
+            clearTimeout(typingTimer);
+        });
+
+        const WebSocket = require('ws');
+        const server = new WebSocket.Server({ port: 8080 });
+
+        server.on('connection', (socket) => {
+            // Handle new connections and messages here
+        });
+
+        const express = require('express');
+        const app = express();
+        const port = 3000;
+
+        app.get('/', (req, res) => {
+            res.send('Hello World!');
+        });
+
+        app.listen(port, () => {
+            console.log(`Server listening at http://localhost:${port}`);
+        });
+
+        // client.js
+
+        const loginButton = document.getElementById("login-button");
+
+
+
+    </script>
+</body>
+
+</html>

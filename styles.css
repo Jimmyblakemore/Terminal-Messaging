@@ -1,0 +1,193 @@
+* {
+    font-family: 'VT323', monospace;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+}
+
+h1,
+h2 {
+    margin-bottom: 1rem;
+    color: #fff;
+    padding: 0;
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+    position: relative;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+/* Login section */
+
+#login {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    right: calc(18% - 400px);
+    margin-right: 260px;
+    margin-top: 40px;
+}
+
+/* Online users */
+#online-users {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    padding-top: 0;
+
+}
+
+#online-users h2 {
+    padding-top: 0;
+}
+
+#user-list {
+    list-style: none;
+    padding: 0;
+}
+
+#user-list li {
+    color: #21C10A;
+    margin-bottom: 0.5rem;
+}
+
+@keyframes pulsate {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.user-list-item {
+    animation: pulsate 2s infinite;
+}
+
+/* Terminal window */
+#terminal-window {
+    background-color: #000;
+    background-size: 9px;
+    color: #fff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    max-height: 400px;
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid white;
+    height: 300px;
+
+
+}
+
+@keyframes pan-overlay {
+    from {
+        background-position: 0% 0%;
+    }
+
+    to {
+        background-position: 0% -100%;
+    }
+}
+
+.screen-overlay {
+    background: linear-gradient(rgba(33, 193, 10, 0.04),
+            rgba(33, 193, 10, 0.06) 3px,
+            transparent 3px,
+            transparent 9px);
+    background-size: 100% 6px;
+    height: 100%;
+    width: 100%;
+    animation: pan-overlay 90s infinite linear;
+    position: absolute;
+    z-index: 2;
+    left: 0px;
+    top: 0px;
+}
+
+/* Add keyframes animation for scanlines */
+@keyframes scanlines {
+    0% {
+        transform: translateY(0%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+
+
+/* Message typing indicator */
+.typing-indicator {
+    color: #FFB800;
+    font-style: italic;
+}
+
+/* Input fields and buttons */
+input[type="text"] {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 0.5rem;
+    font-size: 19px;
+}
+
+button {
+    background-color: #000;
+    color: #000;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+#message-input {
+    width: 500px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+#send-button {
+    position: absolute;
+    bottom: 88px;
+    right: calc(50% - 400px);
+    width: 100px;
+}
+
+.btn {
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding-top: 4px;
+    padding-bottom: 8px;
+    color: white;
+}
+
+#login-button,
+#send-button {
+    border: 1px solid #fff;
+}
+
+label {
+    font-size: 1rem;
+}
